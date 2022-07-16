@@ -12,7 +12,7 @@ export class ApiClient {
   public static delete = async (path: string) => ApiClient.doRequest('DELETE', path);
 
   private static doRequest = async (method: string, path: string, body?: any) => {
-    const response = await fetch(`${ ApiClient.host }/api${ path }`, {
+    const response = await fetch(`${ApiClient.host}/api${path}`, {
       method,
       credentials: 'same-origin',
       headers: {
@@ -25,6 +25,6 @@ export class ApiClient {
     if (!response.ok) {
       throw new Error(`${path} returned ${response.status}`);
     }
-    return response.json();  
+    return response.json();
   };
 }

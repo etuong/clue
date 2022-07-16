@@ -28,35 +28,35 @@ export const Console = props => {
 
   useEffect(() => {
     if (player !== "") {
-      props.socket.on("client-to-client", function(toPlayer, msg) {
+      props.socket.on("client-to-client", function (toPlayer, msg) {
         if (toPlayer === player) {
           updateOutputMessage(msg);
         }
       });
-      props.socket.on("message", function(msg) {
+      props.socket.on("message", function (msg) {
         updateOutputMessage(msg);
       });
-  
-      props.socket.on("start", function(msg) {
+
+      props.socket.on("start", function (msg) {
         updateOutputMessage(msg);
       });
-  
-      props.socket.on("player-move", function(msg) {
+
+      props.socket.on("player-move", function (msg) {
         updateOutputMessage(msg);
       });
-  
-      props.socket.on("disapprove", function(msg, a) {
+
+      props.socket.on("disapprove", function (msg, a) {
         updateOutputMessage(msg);
       });
-  
-      props.socket.on("whatever", function(msg, a) {
+
+      props.socket.on("whatever", function (msg, a) {
         updateOutputMessage(msg);
       });
-  
-      props.socket.on("new-player", function(newPlayer) {
+
+      props.socket.on("new-player", function (newPlayer) {
         updateOutputMessage(newPlayer);
       });
-  
+
       props.socket.on("current-player", async tag => {
         updateOutputMessage("It's " + tag + " turn!");
       });
@@ -167,7 +167,7 @@ export const Console = props => {
       props.socket.emit(
         "channel-disapprove",
         response.current_player_info.player_name +
-          ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
+        ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
         response.current_player_info
       );
     }

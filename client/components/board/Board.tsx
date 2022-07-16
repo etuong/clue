@@ -92,7 +92,7 @@ export const Board = props => {
 
   useEffect(() => {
     if (props.character !== "") {
-      props.socket.on("update-board", async function(currentCharacter) {
+      props.socket.on("update-board", async function (currentCharacter) {
         await resetBoard();
         const response = await ApiClient.get("/players");
 
@@ -144,8 +144,8 @@ export const Board = props => {
     isEmpty(room)
       ? character
       : room.includes(character)
-      ? room
-      : room + ", " + character;
+        ? room
+        : room + ", " + character;
 
   const setRoomOrHall = (roomHall, prettifiedCharacterName) => {
     switch (roomHall) {

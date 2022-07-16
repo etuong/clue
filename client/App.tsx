@@ -8,7 +8,7 @@ import { Cards } from "./components/Card/Cards";
 import { ApiClient } from "./ApiClient";
 import { Suspect } from "./components/console/Suspect";
 
-interface AppProps {}
+interface AppProps { }
 
 interface AppState {
   disable: boolean;
@@ -98,7 +98,7 @@ export default class App extends React.Component<AppProps, AppState> {
       this.socket.emit(
         "channel-disapprove",
         response.current_player_info.player_name +
-          ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
+        ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
         response.current_player_info
       );
     }

@@ -1,11 +1,11 @@
 const webpack = require('./webpack.common.config');
 
 module.exports = {
-    ...webpack,
+  ...webpack,
 
-    mode: 'production',
+  mode: 'production',
 
-    plugins: [
-      ...webpack.plugins,
-    ]
+  plugins: [
+    ...webpack.plugins,
+  ]
 };

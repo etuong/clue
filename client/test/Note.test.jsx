@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { shallow } from "enzyme";
 import Note from "../components/note/Notes.tsx";
 
 describe("Note", () => {

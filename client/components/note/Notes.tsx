@@ -4,7 +4,7 @@ import NoteCell from "./NoteCell";
 import NoteType from "./NoteType";
 import "./Note.scss";
 
-interface NotesProps {}
+interface NotesProps { }
 
 interface NotesState {
   notes: NoteType[];

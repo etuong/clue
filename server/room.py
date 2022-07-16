@@ -1,6 +1,8 @@
 import numpy as np
 
+
 class Room:
+
     def __init__(self, name, secret_passage_connection, hallways):
         # Name of the room
         self.name = name
@@ -15,7 +17,7 @@ class Room:
     def get_move_options(self):
         # Get the adj moveable hallways
         move_options = [*self.hallways]
-        
+
         # Append addition secret connection for kitchen, study, conservatory, and lounge rooms
         if self.secret_passage_connection:
             move_options.append(self.secret_passage_connection)

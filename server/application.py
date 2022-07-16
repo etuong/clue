@@ -11,11 +11,12 @@ import os
 # Delete	DELETE	    Delete a thing
 
 # EB looks for an 'application' callable by default.
-application = Flask(__name__, static_url_path = "")
+application = Flask(__name__, static_url_path="")
 api = Api(application)
 CORS(application)
 
 game = game.CluelessGame()
+
 
 class PlayerApi(Resource):
     # Get the player information base on the player's name
@@ -37,9 +38,10 @@ class PlayerApi(Resource):
                 for hall in game.rooms.get(location).hallways:
                     if game.hallways.get(hall):
                         player.available_moves.append(hall)
-                    
+
                 if game.rooms.get(location).secret_passage_connection:
-                    player.available_moves.append(game.rooms.get(location).secret_passage_connection)
+                    player.available_moves.append(
+                        game.rooms.get(location).secret_passage_connection)
 
         return vars(player)
 
@@ -74,7 +76,7 @@ class PlayerMoveApi(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('location', type=str)
         args = parser.parse_args()
-        
+
         # Can't move if it's not your turn
         if game.current_player != player_name:
             return jsonify(error="It is not your turn to make a move")
@@ -82,7 +84,7 @@ class PlayerMoveApi(Resource):
             return jsonify(error="Player moves are not allowed right now")
 
         player = game.players.get(player_name)
-        
+
         if player.room_hall in game.hallways.keys():
             game.hallways[player.room_hall] = True
 
@@ -113,10 +115,13 @@ class PlayerMoveApi(Resource):
         player.move(new_location)
         player.allow_move = False
 
-        return jsonify(location=new_location, current_player_info=vars(game.players.get(game.current_player)))
+        return jsonify(location=new_location,
+                       current_player_info=vars(
+                           game.players.get(game.current_player)))
 
 
 class AccusationsApi(Resource):
+
     def get(self, player_name):
         return jsonify(game.game_answer)
 
@@ -126,25 +131,30 @@ class AccusationsApi(Resource):
         parser.add_argument('accused_weapon')
         parser.add_argument('accused_room')
         args = parser.parse_args()
-        
+
         if game.current_player != player_name:
             return jsonify(error="It is not your turn to make an accusation")
 
         game.players.get(game.current_player).made_accusation = True
 
-        guessed_answer = (args.accused_character, args.accused_room, args.accused_weapon)
+        guessed_answer = (args.accused_character, args.accused_room,
+                          args.accused_weapon)
         print(guessed_answer)
         print(game.game_answer)
 
         if guessed_answer == game.game_answer:
             return jsonify(guess=True, current_player=game.current_player)
         else:
-            game.current_player = game.players.get(game.current_player).next_player
+            game.current_player = game.players.get(
+                game.current_player).next_player
 
-            return jsonify(guess=False, current_player_info=vars(game.players.get(game.current_player)))
+            return jsonify(guess=False,
+                           current_player_info=vars(
+                               game.players.get(game.current_player)))
 
 
 class SuggestionsApi(Resource):
+
     def get(self, player_name):
         return jsonify(game.game_answer)
 
@@ -184,21 +194,24 @@ class SuggestionsApi(Resource):
             if player.player_name != player_name:
                 player.allow_disapproval = True
 
-        guessed_answer = (suggested_character, suggested_room, suggested_weapon)
+        guessed_answer = (suggested_character, suggested_room,
+                          suggested_weapon)
 
         # Keep a reference of the suggesting player
         game.suggesting_player = game.current_player
 
         # Turn off this flag so current player can't make any more suggestion on this round
         game.players.get(game.current_player).allow_suggestion = False
-        
+
         # Get the next player and allow him to disapprove
         game.current_player = game.players.get(game.current_player).next_player
 
-        return jsonify(current_player_info=vars(game.players.get(game.current_player)))
+        return jsonify(
+            current_player_info=vars(game.players.get(game.current_player)))
 
 
 class DisproveSuggestionApi(Resource):
+
     def put(self):
         parser = reqparse.RequestParser()
         parser.add_argument('card')
@@ -209,15 +222,16 @@ class DisproveSuggestionApi(Resource):
         current_player.allow_disapproval = False
 
         # If player does not have the cards to disapprove, then proceed to the next player
-        if args.card == "empty": 
+        if args.card == "empty":
             game.current_player = current_player.next_player
         else:
             if not game.players.get(game.suggesting_player).allow_move:
-                game.current_player = game.players.get(game.suggesting_player).next_player
+                game.current_player = game.players.get(
+                    game.suggesting_player).next_player
 
                 if current_player.made_accusation:
                     game.current_player = current_player.next_player
-                    
+
                 game.suggesting_player = None
                 game.players.get(game.current_player).allow_move = True
                 #game.player_moved = False
@@ -228,10 +242,12 @@ class DisproveSuggestionApi(Resource):
                 game.current_player = game.suggesting_player
                 game.suggesting_player = None
 
-        return jsonify(current_player_info=vars(game.players.get(game.current_player)))
+        return jsonify(
+            current_player_info=vars(game.players.get(game.current_player)))
 
 
 class StartApi(Resource):
+
     def post(self):
         # When game begins playing, distribute cards to the players
         game.set_player_order()
@@ -244,15 +260,18 @@ class StartApi(Resource):
 
         response['current_player'] = game.current_player
         return response
-    
+
     def get(self):
         # Return game state
         return {'isPlaying': game.game_started}
 
+
 class ResetGameApi(Resource):
+
     def post(self):
         game.reset()
         return jsonify(reset=True)
+
 
 api.add_resource(PlayerApi, '/api/player/<player_name>')
 api.add_resource(PlayersApi, '/api/players')
@@ -265,4 +284,6 @@ api.add_resource(ResetGameApi, '/api/reset')
 
 if __name__ == "__main__":
     application.debug = True
-    application.run(host='0.0.0.0', port=os.environ.get('PORT', 8080), debug=True)
+    application.run(host='0.0.0.0',
+                    port=os.environ.get('PORT', 8080),
+                    debug=True)

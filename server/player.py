@@ -1,4 +1,5 @@
 class Player:
+
     def __init__(self, player_name, character_name, room_hall):
         # Name of the player (user)
         self.player_name = player_name

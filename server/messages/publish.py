@@ -3,10 +3,11 @@ import pika
 import sys
 
 # Name of the Exchange
-exchange_name='logs'
+exchange_name = 'logs'
 
 # Open a connection with localhost
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(host='localhost'))
 
 # Open a channel with exchange type as fanout
 channel = connection.channel()

@@ -4,4 +4,5 @@
     "python.linting.enabled": true,
     "python.jediEnabled": true,
     "explorer.autoReveal": false,
+    "python.formatting.provider": "yapf",
 }
