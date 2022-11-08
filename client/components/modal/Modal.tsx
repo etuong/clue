@@ -3,7 +3,7 @@ import "./Modal.scss";
 import { Suspect } from "../console/Suspect";
 import { ApiClient } from "../../ApiClient";
 
-export const Modal = props => {
+export const Modal = (props) => {
   const [player, setPlayer] = useState<string>("");
   const [character, setCharacter] = useState<string>(Suspect.miss_scarlet);
   const [dialog, setDialog] = useState<HTMLDialogElement | null>(null);
@@ -14,11 +14,11 @@ export const Modal = props => {
     }
   }, [dialog]);
 
-  const handleplayerChange = event => {
+  const handleplayerChange = (event) => {
     setPlayer(event.target.value);
   };
 
-  const handlecharacterChange = selectedOption => {
+  const handlecharacterChange = (selectedOption) => {
     setCharacter(selectedOption.target.value);
   };
 
@@ -33,7 +33,7 @@ export const Modal = props => {
 
   return (
     <dialog
-      ref={ref => setDialog(ref)}
+      ref={(ref) => setDialog(ref)}
       className={`modal center-dialog modal-body`}
     >
       <p>To play, please type in your name and choose a character</p>
@@ -44,7 +44,7 @@ export const Modal = props => {
       <div className="block">
         <label>Character:</label>
         <select onChange={handlecharacterChange}>
-          {Object.keys(Suspect).map(key => (
+          {Object.keys(Suspect).map((key) => (
             <option key={key} value={key}>
               {Suspect[key as any]}
             </option>

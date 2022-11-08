@@ -2,7 +2,7 @@ import React from "react";
 import "./Cards.scss";
 import { useState, useEffect } from "react";
 
-export const Cards = props => {
+export const Cards = (props) => {
   const [disapprove, setDisapprove] = useState<boolean>(false);
 
   useEffect(() => {
@@ -25,7 +25,9 @@ export const Cards = props => {
             key={idx}
             src={card}
             className={`${disapprove && "disapprove"}`}
-            onClick={disapprove ? () => props.cardClick(card, props.player) : undefined}
+            onClick={
+              disapprove ? () => props.cardClick(card, props.player) : undefined
+            }
           />
         );
       })}

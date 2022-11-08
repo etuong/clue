@@ -5,7 +5,6 @@ export async function renderComponent(
   component: React.ReactElement<any>
 ): Promise<RenderResult> {
   const container = render(component);
-  await new Promise(resolve => setTimeout(resolve, 1));
+  await new Promise((resolve) => setTimeout(resolve, 1));
   return container;
 }
-

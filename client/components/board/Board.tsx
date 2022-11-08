@@ -16,7 +16,7 @@ import { ApiClient } from "../../ApiClient";
 import { prettifyName } from "../../utils/CharacterNameHelper";
 import { Suspect } from "../console/Suspect";
 
-export const Board = props => {
+export const Board = (props) => {
   "use strict";
   const [study, setStudy] = useState<string>("");
   const [studyHall, setStudyHall] = useState<string>("");
@@ -41,53 +41,38 @@ export const Board = props => {
   const [kitchen, setKitchen] = useState<string>("");
 
   const [isStudySelected, setIsStudySelected] = useState<boolean>(false);
-  const [isStudyHallSelected, setIsStudyHallSelected] = useState<boolean>(
-    false
-  );
+  const [isStudyHallSelected, setIsStudyHallSelected] =
+    useState<boolean>(false);
   const [isHallSelected, setIsHallSelected] = useState<boolean>(false);
-  const [isHallLoungeSelected, setIsHallLoungeSelected] = useState<boolean>(
-    false
-  );
+  const [isHallLoungeSelected, setIsHallLoungeSelected] =
+    useState<boolean>(false);
   const [isLoungeSelected, setIsLoungeSelected] = useState<boolean>(false);
-  const [isStudyLibrarySelected, setIsStudyLibrarySelected] = useState<boolean>(
-    false
-  );
-  const [isHallBilliardSelected, setIsHallBilliardSelected] = useState<boolean>(
-    false
-  );
-  const [isLoungeDiningSelected, setLoungeDiningSelected] = useState<boolean>(
-    false
-  );
+  const [isStudyLibrarySelected, setIsStudyLibrarySelected] =
+    useState<boolean>(false);
+  const [isHallBilliardSelected, setIsHallBilliardSelected] =
+    useState<boolean>(false);
+  const [isLoungeDiningSelected, setLoungeDiningSelected] =
+    useState<boolean>(false);
   const [isLibarySelected, setIsLibarySelected] = useState<boolean>(false);
-  const [isLibraryBilliardSelected, setIsLibraryBilliardSelected] = useState<
-    boolean
-  >(false);
+  const [isLibraryBilliardSelected, setIsLibraryBilliardSelected] =
+    useState<boolean>(false);
   const [isBilliardSelected, setIsBilliardSelected] = useState<boolean>(false);
-  const [isBilliardDiningSelected, setIsBilliardDiningSelected] = useState<
-    boolean
-  >(false);
+  const [isBilliardDiningSelected, setIsBilliardDiningSelected] =
+    useState<boolean>(false);
   const [isDiningSelected, setIsDiningSelected] = useState<boolean>(false);
-  const [
-    isLibraryConservatorySelected,
-    setIsLibraryConservatorySelected
-  ] = useState<boolean>(false);
-  const [isBilliardBallroomSelected, setIsBilliardBallroomSelected] = useState<
-    boolean
-  >(false);
-  const [isDiningKitchenSelected, setIsDiningKitchenSelected] = useState<
-    boolean
-  >(false);
-  const [isConservatorySelected, setIsConservatorySelected] = useState<boolean>(
-    false
-  );
-  const [
-    isConservatoryBallroomSelected,
-    setIsConservatoryBallroomSelected
-  ] = useState<boolean>(false);
+  const [isLibraryConservatorySelected, setIsLibraryConservatorySelected] =
+    useState<boolean>(false);
+  const [isBilliardBallroomSelected, setIsBilliardBallroomSelected] =
+    useState<boolean>(false);
+  const [isDiningKitchenSelected, setIsDiningKitchenSelected] =
+    useState<boolean>(false);
+  const [isConservatorySelected, setIsConservatorySelected] =
+    useState<boolean>(false);
+  const [isConservatoryBallroomSelected, setIsConservatoryBallroomSelected] =
+    useState<boolean>(false);
   const [isBallroomSelected, setIsBallroomSelected] = useState<boolean>(false);
-  const [isBallroomKitchenSelected, setIsBallroomKitchenSelected] = useState<
-    boolean
-  >(false);
+  const [isBallroomKitchenSelected, setIsBallroomKitchenSelected] =
+    useState<boolean>(false);
   const [isKitchenSelected, setIsKitchenSelected] = useState<boolean>(false);
 
   useEffect(() => {
@@ -119,7 +104,7 @@ export const Board = props => {
     }
   }, [props.character]);
 
-  const publishNewLocation = async tag => {
+  const publishNewLocation = async (tag) => {
     const payload = { location: tag };
     const response = await ApiClient.put(
       "/player/move/" + props.player,
@@ -144,82 +129,82 @@ export const Board = props => {
     isEmpty(room)
       ? character
       : room.includes(character)
-        ? room
-        : room + ", " + character;
+      ? room
+      : room + ", " + character;
 
   const setRoomOrHall = (roomHall, prettifiedCharacterName) => {
     switch (roomHall) {
       case "study":
-        setStudy(prev => cleanRoom(prev, prettifiedCharacterName));
+        setStudy((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "study-hall":
-        setStudyHall(prev => cleanRoom(prev, prettifiedCharacterName));
+        setStudyHall((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "hall":
-        setHall(prev => cleanRoom(prev, prettifiedCharacterName));
+        setHall((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "hall-lounge":
-        setHallLounge(prev => cleanRoom(prev, prettifiedCharacterName));
+        setHallLounge((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "lounge":
-        setLounge(prev => cleanRoom(prev, prettifiedCharacterName));
+        setLounge((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "study-library":
-        setStudyLibrary(prev => cleanRoom(prev, prettifiedCharacterName));
+        setStudyLibrary((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "hall-billiard":
-        setHallBilliard(prev => cleanRoom(prev, prettifiedCharacterName));
+        setHallBilliard((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "lounge-dining":
-        setLoungeDining(prev => cleanRoom(prev, prettifiedCharacterName));
+        setLoungeDining((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "library":
-        setLibrary(prev => cleanRoom(prev, prettifiedCharacterName));
+        setLibrary((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "library-billiard":
-        setLibraryBilliard(prev => cleanRoom(prev, prettifiedCharacterName));
+        setLibraryBilliard((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "billiard":
-        setBilliard(prev => cleanRoom(prev, prettifiedCharacterName));
+        setBilliard((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "billiard-dining":
-        setBilliardDining(prev => cleanRoom(prev, prettifiedCharacterName));
+        setBilliardDining((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "dining":
-        setDining(prev => cleanRoom(prev, prettifiedCharacterName));
+        setDining((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "library-conservatory":
-        setLibraryConservatory(prev =>
+        setLibraryConservatory((prev) =>
           cleanRoom(prev, prettifiedCharacterName)
         );
         break;
       case "billiard-ballroom":
-        setBilliardBallroom(prev => cleanRoom(prev, prettifiedCharacterName));
+        setBilliardBallroom((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "dining-kitchen":
-        setDiningKitchen(prev => cleanRoom(prev, prettifiedCharacterName));
+        setDiningKitchen((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "conservatory":
-        setConservatory(prev => cleanRoom(prev, prettifiedCharacterName));
+        setConservatory((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "conservatory-ballroom":
-        setConservatoryBallroom(prev =>
+        setConservatoryBallroom((prev) =>
           cleanRoom(prev, prettifiedCharacterName)
         );
         break;
       case "ballroom":
-        setBallroom(prev => cleanRoom(prev, prettifiedCharacterName));
+        setBallroom((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "ballroom-kitchen":
-        setBallroomKitchen(prev => cleanRoom(prev, prettifiedCharacterName));
+        setBallroomKitchen((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
       case "kitchen":
-        setKitchen(prev => cleanRoom(prev, prettifiedCharacterName));
+        setKitchen((prev) => cleanRoom(prev, prettifiedCharacterName));
         break;
     }
   };
 
-  const setRoomOrHallIsSelected = roomOrHall => {
+  const setRoomOrHallIsSelected = (roomOrHall) => {
     switch (roomOrHall) {
       case "study":
         setIsStudySelected(true);

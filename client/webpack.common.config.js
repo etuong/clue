@@ -5,22 +5,22 @@ module.exports = {
   context: path.resolve(__dirname, ""),
 
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".png", ".jpg"]
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".png", ".jpg"],
   },
 
   entry: {
-    main: "./index.tsx"
+    main: "./index.tsx",
   },
 
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
 
   node: {
     fs: "empty",
     net: "empty",
-    tls: "empty"
+    tls: "empty",
   },
 
   module: {
@@ -28,39 +28,39 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: "ts-loader",
-        exclude: [path.resolve(__dirname, "../node_modules")]
+        exclude: [path.resolve(__dirname, "../node_modules")],
       },
       {
         test: /\.(js|jsx)$/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
         },
-        exclude: [path.resolve(__dirname, "../node_modules")]
+        exclude: [path.resolve(__dirname, "../node_modules")],
       },
       {
         test: [/\.scss$/, /\.css$/],
         use: [
           {
-            loader: "style-loader"
+            loader: "style-loader",
           },
           {
-            loader: "css-loader"
+            loader: "css-loader",
           },
           {
-            loader: "sass-loader"
-          }
-        ]
+            loader: "sass-loader",
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"]
-      }
-    ]
+        use: ["file-loader"],
+      },
+    ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Clueless"
-    })
-  ]
+      title: "Clueless",
+    }),
+  ],
 };

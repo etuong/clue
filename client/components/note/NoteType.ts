@@ -1,8 +1,8 @@
 export default class NoteType {
-    note: string;
-    id: number;
-    constructor() {
-        this.note = '';
-        this.id = 0;
-    }
+  note: string;
+  id: number;
+  constructor() {
+    this.note = "";
+    this.id = 0;
+  }
 }

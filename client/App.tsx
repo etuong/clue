@@ -8,7 +8,7 @@ import { Cards } from "./components/Card/Cards";
 import { ApiClient } from "./ApiClient";
 import { Suspect } from "./components/console/Suspect";
 
-interface AppProps { }
+interface AppProps {}
 
 interface AppState {
   disable: boolean;
@@ -26,7 +26,7 @@ export default class App extends React.Component<AppProps, AppState> {
       player: "",
       character: "",
       isPlaying: false,
-      currentPlayerHeader: ""
+      currentPlayerHeader: "",
     };
     this.socket = this.io.connect("http://localhost:3001", { reconnect: true });
   }
@@ -34,16 +34,16 @@ export default class App extends React.Component<AppProps, AppState> {
   componentDidMount() {
     this.setIsPlaying();
 
-    this.socket.on("start", async msg => {
+    this.socket.on("start", async (msg) => {
       const response = await ApiClient.get("/player/" + this.state.player);
       console.log(msg);
       this.setPlayerDeck(response);
       this.enableGame();
     });
 
-    this.socket.on("current-player", async msg => {
+    this.socket.on("current-player", async (msg) => {
       this.setState({
-        currentPlayerHeader: msg
+        currentPlayerHeader: msg,
       });
     });
   }
@@ -81,7 +81,7 @@ export default class App extends React.Component<AppProps, AppState> {
 
   handleDisapproval = async (card, suggestedPlayer) => {
     const payload = {
-      card: this.playerCards.get(card)
+      card: this.playerCards.get(card),
     };
     const response = await ApiClient.put("/player/disprove", payload);
     this.socket.emit(
@@ -98,7 +98,7 @@ export default class App extends React.Component<AppProps, AppState> {
       this.socket.emit(
         "channel-disapprove",
         response.current_player_info.player_name +
-        ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
+          ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
         response.current_player_info
       );
     }
@@ -111,7 +111,7 @@ export default class App extends React.Component<AppProps, AppState> {
     }
   };
 
-  setPlayerDeck = response => {
+  setPlayerDeck = (response) => {
     response.cards.map((c: string) =>
       this.playerCards.set(require("./assets/" + c + ".jpg"), c)
     );
@@ -119,13 +119,8 @@ export default class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
-    const {
-      disable,
-      player,
-      character,
-      isPlaying,
-      currentPlayerHeader
-    } = this.state;
+    const { disable, player, character, isPlaying, currentPlayerHeader } =
+      this.state;
     if (!isPlaying) {
       return (
         <>

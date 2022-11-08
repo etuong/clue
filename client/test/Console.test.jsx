@@ -9,4 +9,3 @@ describe("Console", () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 });
-

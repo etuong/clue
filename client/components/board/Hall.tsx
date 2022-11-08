@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const Hall = props => {
+export const Hall = (props) => {
   return (
     <td onClick={props.selected ? () => props.cellClick(props.tag) : undefined}>
       <div

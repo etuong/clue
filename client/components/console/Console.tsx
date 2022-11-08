@@ -7,16 +7,15 @@ import { Room } from "./Room";
 import { ApiClient } from "../../ApiClient";
 import { unprettifyName } from "../../utils/CharacterNameHelper";
 
-export const Console = props => {
+export const Console = (props) => {
   const [player, setPlayer] = useState<string>("");
   const [character, setCharacter] = useState<string>("");
   const [output, setOutput] = useState<string>("");
   const [weapon, setWeapon] = useState<string>("");
   const [room, setRoom] = useState<string>(Room.empty);
   const [suspect, setSuspect] = useState<string>("");
-  const [readyToSuggestOrAccuse, setReadyToSuggestOrAccuse] = useState<boolean>(
-    false
-  );
+  const [readyToSuggestOrAccuse, setReadyToSuggestOrAccuse] =
+    useState<boolean>(false);
 
   let outputMessage = "";
 
@@ -57,13 +56,13 @@ export const Console = props => {
         updateOutputMessage(newPlayer);
       });
 
-      props.socket.on("current-player", async tag => {
+      props.socket.on("current-player", async (tag) => {
         updateOutputMessage("It's " + tag + " turn!");
       });
     }
   }, [player]);
 
-  const getUpdatedPlayer = async playerName => {
+  const getUpdatedPlayer = async (playerName) => {
     if (playerName) {
       const response = await ApiClient.get("/player/" + playerName);
       const roomHall = response.room_hall;
@@ -80,7 +79,7 @@ export const Console = props => {
         hour: "numeric",
         minute: "numeric",
         second: "numeric",
-        hour12: true
+        hour12: true,
       }) + " "
     );
   };
@@ -92,15 +91,15 @@ export const Console = props => {
     textarea!.scrollTop = textarea!.scrollHeight;
   };
 
-  const handleSuspectChange = selectedOption => {
+  const handleSuspectChange = (selectedOption) => {
     setSuspect(selectedOption.label);
   };
 
-  const handleRoomChange = selectedOption => {
+  const handleRoomChange = (selectedOption) => {
     setRoom(selectedOption.label);
   };
 
-  const handleWeaponChange = selectedOption => {
+  const handleWeaponChange = (selectedOption) => {
     setWeapon(selectedOption.label);
   };
 
@@ -115,7 +114,7 @@ export const Console = props => {
     const payload = {
       accused_character: unprettifyName(suspect),
       accused_weapon: weapon.toLowerCase(),
-      accused_room: room.toLowerCase()
+      accused_room: room.toLowerCase(),
     };
     const response = await ApiClient.put(
       "/player/accusation/" + player,
@@ -147,7 +146,7 @@ export const Console = props => {
     const payload = {
       suggested_character: unprettifyName(suspect),
       suggested_weapon: weapon,
-      suggested_room: room
+      suggested_room: room,
     };
     const response = await ApiClient.put(
       "/player/suggestions/" + player,
@@ -167,28 +166,28 @@ export const Console = props => {
       props.socket.emit(
         "channel-disapprove",
         response.current_player_info.player_name +
-        ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
+          ", if applicable, please click on a card to disapprove or click on the empty card to go on the next player",
         response.current_player_info
       );
     }
   };
 
-  const weapons = Object.keys(Weapon).filter(item => {
+  const weapons = Object.keys(Weapon).filter((item) => {
     return isNaN(Number(item));
   });
 
   const suspects = () => {
-    return Object.keys(Suspect).filter(item => {
+    return Object.keys(Suspect).filter((item) => {
       return isNaN(Number(item));
     });
   };
 
-  const rooms = Object.keys(Room).filter(item => {
+  const rooms = Object.keys(Room).filter((item) => {
     return isNaN(Number(item));
   });
 
   const customStyle = {
-    container: styles => ({ ...styles, width: "40%" })
+    container: (styles) => ({ ...styles, width: "40%" }),
   };
 
   return (
@@ -199,9 +198,9 @@ export const Console = props => {
         <Select
           placeholder="Select a suspect.."
           styles={customStyle}
-          options={suspects().map(v => ({
+          options={suspects().map((v) => ({
             label: Suspect[v],
-            value: v
+            value: v,
           }))}
           onChange={handleSuspectChange}
         />
@@ -211,9 +210,9 @@ export const Console = props => {
         <Select
           placeholder={room}
           styles={customStyle}
-          options={rooms.map(v => ({
+          options={rooms.map((v) => ({
             label: Room[v],
-            value: v
+            value: v,
           }))}
           onChange={handleRoomChange}
         />
@@ -223,9 +222,9 @@ export const Console = props => {
         <Select
           placeholder="Select a weapon.."
           styles={customStyle}
-          options={weapons.map(v => ({
+          options={weapons.map((v) => ({
             label: Weapon[v],
-            value: v
+            value: v,
           }))}
           onChange={handleWeaponChange}
         />

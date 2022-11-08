@@ -1,10 +1,10 @@
 import { Suspect } from "../components/console/Suspect";
 
-export const prettifyName = name => {
+export const prettifyName = (name) => {
   return Suspect[name];
 };
 
-export const unprettifyName = name => {
+export const unprettifyName = (name) => {
   let unprettifiedName = "";
   switch (name) {
     case "Miss Scarlet":

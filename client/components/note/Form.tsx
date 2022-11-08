@@ -16,15 +16,15 @@ export default class Form extends React.Component<FormProps, FormState> {
     super(props);
     this.state = {
       note: "",
-      id: 0
+      id: 0,
     };
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ note: e.target.value });
   };
 
-  handleKeyPress = e => {
+  handleKeyPress = (e) => {
     if (e.key === "Enter" && this.state.note !== "") {
       const { note, id } = this.state;
       this.props.createNote({ note, id });
@@ -39,7 +39,7 @@ export default class Form extends React.Component<FormProps, FormState> {
         <input
           placeholder="Write new note here.."
           onKeyPress={this.handleKeyPress}
-          onChange={e => this.onChange(e)}
+          onChange={(e) => this.onChange(e)}
           value={this.state.note}
         />
       </div>

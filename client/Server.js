@@ -28,17 +28,16 @@ io.on("connection", function (socket) {
     io.emit("message", sentence);
   });
 
-  socket.on("channel-current-player", function (
-    current_player,
-    current_character,
-    prettifiedCurrentCharacter
-  ) {
-    currentCharacter = current_character;
-    const tag = current_player + " (" + prettifiedCurrentCharacter + ")'s";
-    console.log(tag);
-    io.emit("current-player", tag);
-    io.emit("update-board", current_character);
-  });
+  socket.on(
+    "channel-current-player",
+    function (current_player, current_character, prettifiedCurrentCharacter) {
+      currentCharacter = current_character;
+      const tag = current_player + " (" + prettifiedCurrentCharacter + ")'s";
+      console.log(tag);
+      io.emit("current-player", tag);
+      io.emit("update-board", current_character);
+    }
+  );
 
   socket.on("channel-player-move", function (tag) {
     io.emit("player-move", tag);

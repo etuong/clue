@@ -4,7 +4,7 @@ import NoteCell from "./NoteCell";
 import NoteType from "./NoteType";
 import "./Note.scss";
 
-interface NotesProps { }
+interface NotesProps {}
 
 interface NotesState {
   notes: NoteType[];
@@ -14,7 +14,7 @@ export default class Notes extends React.Component<NotesProps, NotesState> {
   constructor(props) {
     super(props);
     this.state = {
-      notes: []
+      notes: [],
     };
 
     this.createNote = this.createNote.bind(this);
@@ -27,7 +27,7 @@ export default class Notes extends React.Component<NotesProps, NotesState> {
   };
 
   deleteNote = async (id: number) => {
-    const notes = this.state.notes.filter(n => n.id !== id);
+    const notes = this.state.notes.filter((n) => n.id !== id);
     this.setState({ notes });
   };
 

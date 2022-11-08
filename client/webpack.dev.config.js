@@ -1,23 +1,21 @@
-const path = require('path');
-const webpack = require('./webpack.common.config');
+const path = require("path");
+const webpack = require("./webpack.common.config");
 
 module.exports = {
   ...webpack,
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
 
-  mode: 'development',
+  mode: "development",
 
   devServer: {
-    host: 'localhost',
+    host: "localhost",
     port: 3000,
-    contentBase: path.resolve(__dirname, ''),
+    contentBase: path.resolve(__dirname, ""),
     historyApiFallback: true,
     proxy: {
-      '/api/*': 'http://localhost:8080'
+      "/api/*": "http://localhost:8080",
     },
   },
 
-  plugins: [
-    ...webpack.plugins,
-  ]
+  plugins: [...webpack.plugins],
 };
